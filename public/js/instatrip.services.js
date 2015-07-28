@@ -130,6 +130,10 @@ angular.module('instatrip.services', [])
       data: routes
 
     }).then(function(resp){
+
+      // FOR TESTING
+      console.log(resp);
+
       var respLength = resp.data.length;
       for(var i = 0; i < respLength; i++){
         for (var j = 0; j < resp.data[i].length; j++){
