@@ -62,6 +62,9 @@ angular.module('instatrip.services', [])
     initialize();
     var routes = calcRoute(start, end, travelMethod, ourCallback);
 
+    // FOR TESTING
+    var otherRoutes = calcRoute(start, end, travelMethod, locCallback);
+
 // take variable length array and return an array with n evenly spaced points
     var findN = function(input, n){
         var len = input.length;
@@ -85,6 +88,11 @@ angular.module('instatrip.services', [])
         coords: coords
       });
     };
+
+    // FOR TESTING
+    function locCallback(routes, coords){
+      return getLocations();
+    }
 
   };
 
@@ -120,6 +128,17 @@ angular.module('instatrip.services', [])
     }
   };
 
+  var getLocations = function(routes) {
+    console.log('getLocations CALLED');
+    return $http({
+      method: 'POST',
+      url: '/locations',
+      data: routes
+    }).then(function(resp){
+      console.log(resp);
+    });
+  };
+
   // Initiate Instagram request and package response into display
   var getPhoto = function(routes){
     var imgHolder = [];
@@ -130,10 +149,6 @@ angular.module('instatrip.services', [])
       data: routes
 
     }).then(function(resp){
-
-      // FOR TESTING
-      console.log(resp);
-
       var respLength = resp.data.length;
       for(var i = 0; i < respLength; i++){
         for (var j = 0; j < resp.data[i].length; j++){
