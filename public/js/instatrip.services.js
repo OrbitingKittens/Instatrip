@@ -54,6 +54,7 @@ angular.module('instatrip.services', [])
         });
       }
         currentCoords = coords;
+        console.log('CURRENTCORDS: ', currentCoords);
 
         callback(response.routes[0].overview_path, coords);
       });
@@ -128,6 +129,23 @@ angular.module('instatrip.services', [])
     }
   };
 
+  //this is for testing
+  var locMark = function(mockData) {
+    markers = [];
+
+    for (var i = 0; i < mockData.length; i++) {
+      var myLatlng = new google.maps.LatLng(mockData[i].latitude ,mockData[i].longitude);
+      var marker = new google.maps.Marker({
+          position: myLatlng
+       });
+      markers.push(marker);
+    }
+
+    for (i = 0; i < mockData.length; i++){
+      markers[i].setMap(Map);
+    }
+  };
+
   var getLocations = function(routes) {
     console.log('getLocations CALLED');
     return $http({
@@ -136,6 +154,7 @@ angular.module('instatrip.services', [])
       data: routes
     }).then(function(resp){
       console.log(resp);
+      locMark(resp.data);
     });
   };
 
