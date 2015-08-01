@@ -159,9 +159,10 @@ body {
     margin-top: 139px;
 }
 
-.nav-bar{
+.navbar{
   background-color: #512DA8;
   color: white;
+  font-family: 'Fugaz One', cursive;
 }
 
 .navContain{
@@ -418,6 +419,3 @@ a {
   padding-top: 12px;
   padding-right: 14px;
 }
-
-
-
